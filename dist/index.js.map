@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../src/index.ts"],"names":[],"mappings":"AAAA,4EAA4E;AAC5E,OAAO,EAAE,YAAY,EAAE,MAAM,eAAe,CAAA;AAG5C,YAAY,EAAE,CAAC","sourcesContent":["// Curly braces because we exported in the function, not default at bottom? \r\nimport { showMainMenu } from './lib/menu.js'\r\n\r\n\r\nshowMainMenu();\r\n"]}
