@@ -1,42 +1,39 @@
 
-DROP TABLE IF EXISTS wines;
-DROP TABLE IF EXISTS shops;
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS department;
+DROP TABLE IF EXISTS employee;
 
-CREATE TABLE users (
+CREATE TABLE employee (
     id SERIAL PRIMARY KEY,
-    first_name VARCHAR(200) NOT NULL,
-    last_name VARCHAR(200) NOT NULL,
-    email VARCHAR(250) UNIQUE NOT NULL,
-    manager_id INT,
-    FOREIGN KEY (manager_id) REFERENCES users (id)
-        ON DELETE SET NULL
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    role_id INT NOT NULL,
+    manager_id INT
 );
 
-CREATE TABLE shops (
+CREATE TABLE department (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(200) NOT NULL,
-    address VARCHAR(200) NOT NULL,
-    user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id)
-    ON DELETE CASCADE 
+    name VARCHAR(30) UNIQUE NOT NULL
 );
 
-CREATE TABLE wines (
+CREATE TABLE role (
     id SERIAL PRIMARY KEY,
-    brand VARCHAR(250) NOT NULL,
-    type VARCHAR(200) NOT NULL,
-    region VARCHAR(200) NOT NULL,
-    price DECIMAL NOT NULL, 
-    shop_id INT NOT NULL,
-    user_id INT NOT NULL,
-    FOREIGN KEY (shop_id) REFERENCES shops (id)
-        ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES shops (id)
-        ON DELETE CASCADE
+    title VARCHAR(30) NOT NULL,
+    salary DECIMAL NOT NULL,
+    department_id INT NOT NULL
 );
 
 
 
 -- NOTES -------------------------------
 -- SERIAL will auto increment 
+
+-- CREATE TABLE employee (
+--     id SERIAL PRIMARY KEY,
+--     first_name VARCHAR(30) NOT NULL,
+--     last_name VARCHAR(30) NOT NULL,
+--     role_id INT NOT NULL,
+--     manager_id INT,
+--     FOREIGN KEY (manager_id) REFERENCES employee (id)
+--         ON DELETE SET NULL
+-- );

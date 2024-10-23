@@ -6,19 +6,10 @@ import { getAllShops, getAllUsers, createShop } from './query.js';
 let showWelcome = false;
 
 
-
-//async for prompt
+//-------------------------------------
+//ADDING A SHOP FUNCTION
+//-------------------------------------
 export async function addShop() {
-    // const rows = [
-    //     {
-    //         id: 1,
-    //         user_name: 'Nina D'
-    //     },
-    //     {
-    //         id: 2,
-    //         user_name: 'Kara D'
-    //     }
-    // ]
     const usersArray = await getAllUsers();
     const {user_id, name, address} = await inquirer.prompt([
         {
@@ -51,7 +42,9 @@ export async function addShop() {
 
 
 
-
+//-------------------------------------
+//SHOWING ALL SHOPS FUNCTION
+//-------------------------------------
 export async function showAllShops() {
     const shopRowsArray = await getAllShops();
     console.table(shopRowsArray);
@@ -60,9 +53,14 @@ export async function showAllShops() {
 
 
 
+
+
+//-------------------------------------
+//MENU FUNCTION
+//-------------------------------------
 export async function showMainMenu() {
     if (!showWelcome) {
-        console.log('\n----- Welcome To The Shop App -----\n');
+        console.log('\n----- Welcome To The Employee Tracker App -----\n');
         showWelcome = true;
     }
     const { optionFunction } = await inquirer.prompt({
@@ -70,12 +68,32 @@ export async function showMainMenu() {
         name: 'optionFunction',
         type: 'list',
         choices: [{
-            name: 'Show All Shops',
-            value: showAllShops
+            name: 'View All Departments',
+            value: showAllDepartments
         },
         {
-            name: 'Add Shop',
-            value: addShop
+            name: 'View All Roles',
+            value: showAllRoles
+        },
+        {
+            name: 'View All Employees',
+            value: showAllEmployees
+        },
+        {
+            name: 'Add a Department',
+            value: addDepartment
+        },
+        {
+            name: 'Add a Role',
+            value: addRole
+        },
+        {
+            name: 'Add an Employee',
+            value: addEmployee
+        },
+        {
+            name: 'Update an Employee Role',
+            value: updateEmployeeRole
         },
         {
             name: 'Quit',
