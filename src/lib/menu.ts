@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import 'console.table';
 
-import { getAllShops, getAllUsers, createShop } from './query.js';
+import { getAllEmployees } from './query.js';
 
 let showWelcome = false;
 
@@ -9,45 +9,45 @@ let showWelcome = false;
 //-------------------------------------
 //ADDING A SHOP FUNCTION
 //-------------------------------------
-export async function addShop() {
-    const usersArray = await getAllUsers();
-    const {user_id, name, address} = await inquirer.prompt([
-        {
-            message: 'Please select the owner of the shop:',
-            name: 'user_id',
-            type: 'list',
-            choices: usersArray.map((userObj) => {
-                return {
-                    name: userObj.user_name,
-                    value: userObj.id
-                }
-            })
-        },
-        {
-            message: 'Enter the shop name:',
-            name: 'name',
-            type: 'input'
-        },
-        {
-            message: 'Enter the shop address:',
-            name: 'address',
-            type: 'input'
-        }
-    ])
+// export async function addShop() {
+//     const usersArray = await getAllUsers();
+//     const {user_id, name, address} = await inquirer.prompt([
+//         {
+//             message: 'Please select the owner of the shop:',
+//             name: 'user_id',
+//             type: 'list',
+//             choices: usersArray.map((userObj) => {
+//                 return {
+//                     name: userObj.user_name,
+//                     value: userObj.id
+//                 }
+//             })
+//         },
+//         {
+//             message: 'Enter the shop name:',
+//             name: 'name',
+//             type: 'input'
+//         },
+//         {
+//             message: 'Enter the shop address:',
+//             name: 'address',
+//             type: 'input'
+//         }
+//     ])
 
-    await createShop(user_id, name, address);
-    console.log('\nShop created successfully\n');
-}
+//     await createShop(user_id, name, address);
+//     console.log('\nShop created successfully\n');
+// }
 
 
 
 
 //-------------------------------------
-//SHOWING ALL SHOPS FUNCTION
+//SHOWING ALL DEPARTMENTS FUNCTION
 //-------------------------------------
-export async function showAllShops() {
-    const shopRowsArray = await getAllShops();
-    console.table(shopRowsArray);
+export async function showAllEmployees() {
+    const employeeeRowsArray = await getAllEmployees();
+    console.table(employeeeRowsArray);
 }
 
 
@@ -102,7 +102,7 @@ export async function showMainMenu() {
     });
 
     if (!optionFunction) {
-        console.log('\nThanks for using the shop app!\n');
+        console.log('\nThanks for using the app!\n');
         process.exit();   //will [CTRL + C] the terminal 
     }
 

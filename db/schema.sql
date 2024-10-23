@@ -25,7 +25,12 @@ CREATE TABLE role (
 
 
 
+
+
+
+-- -------------------------------------
 -- NOTES -------------------------------
+
 -- SERIAL will auto increment 
 
 -- CREATE TABLE employee (

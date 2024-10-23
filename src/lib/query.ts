@@ -2,8 +2,9 @@ import client from '../config/connection.js';
 import 'console.table';
 
 
-
-export async function getAllShops() {
+// DISPLAY DEPARTMENTS FUNCTION
+// -------------------------------------
+export async function getAllEmployees() {
     const sql = `
     SELECT 
         shops.id AS shop_id,
@@ -34,32 +35,34 @@ export async function getAllShops() {
 
 
 
+// DISPLAY USERS FUNCTION
+// -------------------------------------
+// export async function getAllUsers() {
+//     const sql = `
+//     SELECT 
+//         id, 
+//         CONCAT(first_name, ' ', last_name) AS user_name
+//     FROM users  
+//     `;
 
-export async function getAllUsers() {
-    const sql = `
-    SELECT 
-        id, 
-        CONCAT(first_name, ' ', last_name) AS user_name
-    FROM users  
-    `;
+//     const {rows} = await client.query(sql);
 
-    const {rows} = await client.query(sql);
-
-    return rows;
-}
-
-
-
+//     return rows;
+// }
 
 
-export async function createShop(user_id: number, name: string, address: string) {
-    //Doing this with ${name} can cause issues with sql injection 
-    //So we're using placeholders for now, and will input values later  
-    const sql = `
-        INSERT INTO shops (name, address, user_id) 
-        VALUES ($1, $2, $3)
-    `;
 
-    // this will input the values in order, into the 'prepared statement'
-    await client.query(sql, [name, address, user_id]);
-}
+
+// CREATE SHOP FUNCTION
+// -------------------------------------
+// export async function createShop(user_id: number, name: string, address: string) {
+//     //Doing this with ${name} can cause issues with sql injection 
+//     //So we're using placeholders for now, and will input values later  
+//     const sql = `
+//         INSERT INTO shops (name, address, user_id) 
+//         VALUES ($1, $2, $3)
+//     `;
+
+//     // this will input the values in order, into the 'prepared statement'
+//     await client.query(sql, [name, address, user_id]);
+// }
