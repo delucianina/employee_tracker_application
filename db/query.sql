@@ -15,22 +15,5 @@ JOIN users as managers
 
 
 
-
-
-
--- SELECT 
---     d.id AS user_id,
---     CONCAT(u.first_name, ' ', u.last_name) AS user_name,
---     CONCAT(managers.first_name, ' ', managers.last_name) AS manager_name
--- FROM users AS u
--- LEFT JOIN users AS managers
---     ON u.manager_id = managers.id;
-
-
-
-
--- NOTES --------------------------------
--- Pull all rows from shops and also attach the associated users 
--- First only pulls rows that have an association... 
--- RIGHT means give me all users even if there are no associations (LEFT would mean all shops) 
--- you can combine multiple tables, but you need to combine the clause 
+-- ATTENTION!
+-- This file isn't being used 

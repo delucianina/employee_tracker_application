@@ -72,19 +72,6 @@ export async function getAllDepartments() {
 }
 
 
-
-// export async function createShop(user_id: number, name: string, address: string) {
-    //     //Doing this with ${name} can cause issues with sql injection 
-    //     //So we're using placeholders for now, and will input values later  
-    //     const sql = `
-    //         INSERT INTO shops (name, address, user_id) 
-    //         VALUES ($1, $2, $3)
-    //     `;
-    
-    //     // this will input the values in order, into the 'prepared statement'
-    //     await client.query(sql, [name, address, user_id]);
-    // }
-
     
 // -------------------------------------
 // CREATE DEPARTMENT FUNCTION
@@ -125,3 +112,18 @@ export async function createEmployee(id: number, first_name: string, last_name: 
 
     await client.query(sql, [id, first_name, last_name, role_id, manager_id]);
 }
+
+
+
+// -------------------------------------
+// UPDATE EMPLOYEE FUNCTION
+// -------------------------------------
+export async function updateEmployeeTable(role_id: number, id: number) {
+    const sql = `
+        UPDATE employee
+        SET role_id = $1
+        WHERE id = $2
+    `;
+
+    await client.query(sql, [role_id, id]);
+};

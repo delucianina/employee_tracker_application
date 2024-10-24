@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import 'console.table';
 
-import { getAllDepartments, getAllRoles, getAllEmployees, createDepartment, createRole, createEmployee } from './query.js';
+import { getAllDepartments, getAllRoles, getAllEmployees, createDepartment, createRole, createEmployee, updateEmployeeTable } from './query.js';
 
 let showWelcome = false;
 
@@ -38,6 +38,41 @@ let showWelcome = false;
 //     await createShop(user_id, name, address);
 //     console.log('\nShop created successfully\n');
 // }
+//-------------------------------------
+//UPDATING AN EMPLOYEE FUNCTION
+//-------------------------------------
+export async function updateEmployee() {
+    const employeesArray = await getAllEmployees();
+    const rolesArray = await getAllRoles();
+    const {role_id, id} = await inquirer.prompt([
+        // select an employee to update
+        {
+            message: 'Which employee\'s role would you like to update?',
+            name: 'id',
+            type: 'list',
+            choices: employeesArray.map((userObj) => {
+                return {
+                    name: userObj.id,
+                    value: userObj.id
+                }
+            })
+        },
+        //choose a role 
+        {
+            message: 'What role would you like to assign to them?',
+            name: 'role_id',
+            type: 'list',
+            choices: rolesArray.map((userObj) => {
+                return {
+                    name: userObj.id,
+                    value: userObj.id
+                }
+            })
+        }
+    ])
+    await updateEmployeeTable(role_id, id);
+    console.log('\nEmployee updated successfully\n');
+}
 
 
 
@@ -203,10 +238,10 @@ export async function showMainMenu() {
             name: 'Add an Employee',
             value: addEmployee
         },
-        // {
-        //     name: 'Update an Employee Role',
-        //     value: updateEmployeeRole
-        // },
+        {
+            name: 'Update an Employee Role',
+            value: updateEmployee
+        },
         {
             name: 'Quit',
             value: 0
