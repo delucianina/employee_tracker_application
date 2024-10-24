@@ -3,37 +3,6 @@ import 'console.table';
 import { getAllDepartments, getAllRoles, getAllEmployees, createDepartment, createRole, createEmployee, updateEmployeeTable } from './query.js';
 let showWelcome = false;
 //-------------------------------------
-//ADDING A SHOP FUNCTION
-//-------------------------------------
-// export async function addShop() {
-//     const usersArray = await getAllUsers();
-//     const {user_id, name, address} = await inquirer.prompt([
-//         {
-//             message: 'Please select the owner of the shop:',
-//             name: 'user_id',
-//             type: 'list',
-//             choices: usersArray.map((userObj) => {
-//                 return {
-//                     name: userObj.user_name,
-//                     value: userObj.id
-//                 }
-//             })
-//         },
-//         {
-//             message: 'Enter the shop name:',
-//             name: 'name',
-//             type: 'input'
-//         },
-//         {
-//             message: 'Enter the shop address:',
-//             name: 'address',
-//             type: 'input'
-//         }
-//     ])
-//     await createShop(user_id, name, address);
-//     console.log('\nShop created successfully\n');
-// }
-//-------------------------------------
 //UPDATING AN EMPLOYEE FUNCTION
 //-------------------------------------
 export async function updateEmployee() {
