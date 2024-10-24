@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import 'console.table';
 
-import { getAllDepartments, getAllRoles, getAllEmployees } from './query.js';
+import { getAllDepartments, getAllRoles, getAllEmployees, createDepartment, createRole, createEmployee } from './query.js';
 
 let showWelcome = false;
 
@@ -73,6 +73,100 @@ export async function showAllDepartments() {
 
 
 //-------------------------------------
+//ADDING A DEPARTMENT FUNCTION
+//-------------------------------------
+export async function addDepartment() {
+    const {id, name} = await inquirer.prompt([
+        {
+            message: 'Please input the id number of the new department:',
+            name: 'id',
+            type: 'input'
+        },
+        {
+            message: 'Please input the name of the new department:',
+            name: 'name',
+            type: 'input'
+        }
+    ])
+
+    await createDepartment(id, name);
+    console.log('\nDepartment created successfully.\n');
+}
+
+
+
+//-------------------------------------
+//ADDING A ROLE FUNCTION
+//-------------------------------------
+export async function addRole() {
+    const {id, title, department_id, salary} = await inquirer.prompt([
+        {
+            message: 'Please input the new role\'s id number:',
+            name: 'id',
+            type: 'input'
+        },
+        {
+            message: 'Please input the new role\'s title:',
+            name: 'title',
+            type: 'input'
+        },
+        {
+            message: 'Please input the new role\'s department id:',
+            name: 'department_id',
+            type: 'input'
+        },
+        {
+            message: 'Please input the new role\'s salary:',
+            name: 'salary',
+            type: 'input'
+        }
+    ])
+
+    await createRole(id, title, department_id, salary);
+    console.log('\nRole created successfully.\n');
+}
+
+
+
+//-------------------------------------
+//ADDING A EMPLOYEE FUNCTION
+//-------------------------------------
+export async function addEmployee() {
+    const {id, first_name, last_name, role_id, manager_id} = await inquirer.prompt([
+        {
+            message: 'Please input the new employee\'s id number:',
+            name: 'id',
+            type: 'input'
+        },
+        {
+            message: 'Please input the new employee\'s first name:',
+            name: 'first_name',
+            type: 'input'
+        },
+        {
+            message: 'Please input the new employee\'s last name:',
+            name: 'last_name',
+            type: 'input'
+        },
+        {
+            message: 'Please input the new employee\'s role id number:',
+            name: 'role_id',
+            type: 'input'
+        },
+        {
+            message: 'Please input the new employee\'s manager id number:',
+            name: 'manager_id',
+            type: 'input'
+        }
+    ])
+
+    await createEmployee(id, first_name, last_name, role_id, manager_id);
+    console.log('\nEmployee created successfully.\n');
+}
+
+
+
+//-------------------------------------
 //MENU FUNCTION
 //-------------------------------------
 export async function showMainMenu() {
@@ -97,18 +191,18 @@ export async function showMainMenu() {
             name: 'View All Employees',
             value: showAllEmployees
         },
-        // {
-        //     name: 'Add a Department',
-        //     value: addDepartment
-        // },
-        // {
-        //     name: 'Add a Role',
-        //     value: addRole
-        // },
-        // {
-        //     name: 'Add an Employee',
-        //     value: addEmployee
-        // },
+        {
+            name: 'Add a Department',
+            value: addDepartment
+        },
+        {
+            name: 'Add a Role',
+            value: addRole
+        },
+        {
+            name: 'Add an Employee',
+            value: addEmployee
+        },
         // {
         //     name: 'Update an Employee Role',
         //     value: updateEmployeeRole

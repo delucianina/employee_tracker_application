@@ -1,3 +1,4 @@
+// IMPORTS -----------------------------
 import client from '../config/connection.js';
 import 'console.table';
 // -------------------------------------
@@ -54,20 +55,6 @@ export async function getAllDepartments() {
     const { rows } = await client.query(sql);
     return rows;
 }
-// DISPLAY USERS FUNCTION
-// -------------------------------------
-// export async function getAllUsers() {
-//     const sql = `
-//     SELECT 
-//         id, 
-//         CONCAT(first_name, ' ', last_name) AS user_name
-//     FROM users  
-//     `;
-//     const {rows} = await client.query(sql);
-//     return rows;
-// }
-// CREATE SHOP FUNCTION
-// -------------------------------------
 // export async function createShop(user_id: number, name: string, address: string) {
 //     //Doing this with ${name} can cause issues with sql injection 
 //     //So we're using placeholders for now, and will input values later  
@@ -78,4 +65,34 @@ export async function getAllDepartments() {
 //     // this will input the values in order, into the 'prepared statement'
 //     await client.query(sql, [name, address, user_id]);
 // }
+// -------------------------------------
+// CREATE DEPARTMENT FUNCTION
+// -------------------------------------
+export async function createDepartment(id, name) {
+    const sql = `
+        INSERT INTO department (id, name)
+        VALUES ($1, $2)
+    `;
+    await client.query(sql, [id, name]);
+}
+// -------------------------------------
+// CREATE ROLE FUNCTION
+// -------------------------------------
+export async function createRole(id, title, department_id, salary) {
+    const sql = `
+        INSERT INTO role (id, title, department_id, salary)
+        VALUES ($1, $2, $3, $4)
+    `;
+    await client.query(sql, [id, title, department_id, salary]);
+}
+// -------------------------------------
+// CREATE EMPLOYEE FUNCTION
+// -------------------------------------
+export async function createEmployee(id, first_name, last_name, role_id, manager_id) {
+    const sql = `
+        INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
+        VALUES ($1, $2, $3, $4, $5)
+    `;
+    await client.query(sql, [id, first_name, last_name, role_id, manager_id]);
+}
 //# sourceMappingURL=query.js.map

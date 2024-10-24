@@ -31,19 +31,3 @@ CREATE TABLE employee (
 
 
 
-
-
--- -------------------------------------
--- NOTES -------------------------------
-
--- SERIAL will auto increment 
-
--- CREATE TABLE employee (
---     id SERIAL PRIMARY KEY,
---     first_name VARCHAR(30) NOT NULL,
---     last_name VARCHAR(30) NOT NULL,
---     role_id INT NOT NULL,
---     manager_id INT,
---     FOREIGN KEY (manager_id) REFERENCES employee (id)
---         ON DELETE SET NULL
--- );

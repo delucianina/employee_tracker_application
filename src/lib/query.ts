@@ -1,5 +1,7 @@
+// IMPORTS -----------------------------
 import client from '../config/connection.js';
 import 'console.table';
+
 
 
 // -------------------------------------
@@ -30,6 +32,7 @@ export async function getAllEmployees() {
 }
 
 
+
 // -------------------------------------
 // DISPLAY ROLES FUNCTION
 // -------------------------------------
@@ -51,6 +54,7 @@ export async function getAllRoles() {
 }
 
 
+
 // -------------------------------------
 // DISPLAY DEPARTMENT FUNCTION
 // -------------------------------------
@@ -69,43 +73,55 @@ export async function getAllDepartments() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-// DISPLAY USERS FUNCTION
-// -------------------------------------
-// export async function getAllUsers() {
-//     const sql = `
-//     SELECT 
-//         id, 
-//         CONCAT(first_name, ' ', last_name) AS user_name
-//     FROM users  
-//     `;
-
-//     const {rows} = await client.query(sql);
-
-//     return rows;
-// }
-
-
-
-// CREATE SHOP FUNCTION
-// -------------------------------------
 // export async function createShop(user_id: number, name: string, address: string) {
-//     //Doing this with ${name} can cause issues with sql injection 
-//     //So we're using placeholders for now, and will input values later  
-//     const sql = `
-//         INSERT INTO shops (name, address, user_id) 
-//         VALUES ($1, $2, $3)
-//     `;
+    //     //Doing this with ${name} can cause issues with sql injection 
+    //     //So we're using placeholders for now, and will input values later  
+    //     const sql = `
+    //         INSERT INTO shops (name, address, user_id) 
+    //         VALUES ($1, $2, $3)
+    //     `;
+    
+    //     // this will input the values in order, into the 'prepared statement'
+    //     await client.query(sql, [name, address, user_id]);
+    // }
 
-//     // this will input the values in order, into the 'prepared statement'
-//     await client.query(sql, [name, address, user_id]);
-// }
+    
+// -------------------------------------
+// CREATE DEPARTMENT FUNCTION
+// -------------------------------------
+export async function createDepartment(id: number, name: string) {
+    const sql = `
+        INSERT INTO department (id, name)
+        VALUES ($1, $2)
+    `;
+
+    await client.query(sql, [id, name]);
+}
+
+
+
+// -------------------------------------
+// CREATE ROLE FUNCTION
+// -------------------------------------
+export async function createRole(id: number, title: string, department_id: string, salary: number) {
+    const sql = `
+        INSERT INTO role (id, title, department_id, salary)
+        VALUES ($1, $2, $3, $4)
+    `;
+
+    await client.query(sql, [id, title, department_id, salary]);
+}
+
+
+
+// -------------------------------------
+// CREATE EMPLOYEE FUNCTION
+// -------------------------------------
+export async function createEmployee(id: number, first_name: string, last_name: string, role_id: number, manager_id: number) {
+    const sql = `
+        INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
+        VALUES ($1, $2, $3, $4, $5)
+    `;
+
+    await client.query(sql, [id, first_name, last_name, role_id, manager_id]);
+}
